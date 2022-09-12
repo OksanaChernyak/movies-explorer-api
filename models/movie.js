@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const movieSchema = new mongoose.Schema({
     country: {
         type: String,
-        required: [true, 'Заполните поле country'],
+        required: true,
     },
     director: {
         type: String,
