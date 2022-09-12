@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 30,
         required: true,
+        default: 'Oksik',
     },
     email: {
         type: String,
@@ -24,7 +25,7 @@ const userSchema = new mongoose.Schema({
         select: false,
     },
 });
-/*
+
 userSchema.statics.findUserByCredentials = function (email, password) {
     return this.findOne({ email }).select('+password')
         .then((user) => {
@@ -41,5 +42,5 @@ userSchema.statics.findUserByCredentials = function (email, password) {
                 });
         });
 };
-*/
+
 module.exports = mongoose.model('user', userSchema);

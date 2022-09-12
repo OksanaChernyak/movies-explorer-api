@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
 const BadRequestError = require('../utils/BadRequestError');
-const UnauthorizedError = require('../utils/UnauthorizedError');
 const ConflictingRequestError = require('../utils/ConflictingRequestError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -42,16 +41,14 @@ module.exports.updateProfile = (req, res, next) => {
 
 module.exports.createUser = (req, res, next) => {
     const {
-        name, about, avatar, email, password,
+        name, email, password,
     } = req.body;
     bcrypt.hash(password, 10)
         .then((hash) => User.create({
-            name, about, avatar, email, password: hash,
+            name, email, password: hash,
         }))
         .then((user) => res.send({
             name: user.name,
-            about: user.about,
-            avatar: user.avatar,
             email: user.email,
             _id: user._id,
         }))
