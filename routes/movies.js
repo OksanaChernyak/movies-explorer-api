@@ -22,8 +22,8 @@ router.post('/', celebrate({
         thumbnail: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
         owner: Joi.string().alphanum().length(24).hex(),
         movieId: Joi.string().alphanum().length(24).hex(),
-        nameRU: Joi.string().required(),
-        nameEN: Joi.string().required(),
+        nameRU: Joi.string().required().regex(/^[а-яА-ЯёЁ\d\s]+$/gmi),
+        nameEN: Joi.string().required().regex(/^[\w\s]+$/gmi),
     }),
 }), createMovie);
 module.exports = router;

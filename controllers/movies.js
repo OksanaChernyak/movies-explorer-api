@@ -12,7 +12,7 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovieById = (req, res, next) => {
-    Movie.findById(req.params._id).then((movie) => {
+    Movie.findById(req.params.movieId).then((movie) => {
         if (movie) {
             const ownerId = movie.owner.toString();
             const userId = req.user._id;

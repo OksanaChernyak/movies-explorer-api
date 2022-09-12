@@ -32,7 +32,11 @@ module.exports.updateProfile = (req, res, next) => {
         })
         .catch((error) => {
             if (error.name === 'ValidationError') {
-                next(new BadRequestError('Переданы некорректные данные при редактировании профиля пользователя'));
+                next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+            } else if (
+                error.code === 11000
+            ) {
+                next(new ConflictingRequestError('Такой пользователь уже зарегистрирован'));
             } else {
                 next();
             }
