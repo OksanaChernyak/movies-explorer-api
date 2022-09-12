@@ -9,14 +9,16 @@ const auth = require('./middlewares/auth');
 const errorsHandler = require('./middlewares/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./utils/NotFoundError');
+const { MDB_DEV } = require('./utils/constants');
 const express = require("express");
 const app = express();
 
 const { PORT = 3000 } = process.env;
+const { NODE_ENV, MDB_URL } = process.env;
 
 require('dotenv').config();
 
-mongoose.connect('mongodb://127.0.0.1:27017/moviesdb', {
+mongoose.connect(NODE_ENV === 'production' ? MDB_URL : MDB_DEV, {
     useNewUrlParser: true,
 });
 
