@@ -43,7 +43,7 @@ module.exports.deleteMovieById = (req, res, next) => {
 module.exports.createMovie = (req, res, next) => {
     const owner = req.user._id;
     const { country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId } = req.body;
-    Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId })
+    Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner })
         .then((movie) => res.send(movie))
         .catch((error) => {
             if (error.name === 'ValidationError') {
