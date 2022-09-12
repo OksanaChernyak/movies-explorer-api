@@ -26,3 +26,4 @@ router.post('/', celebrate({
         nameEN: Joi.string().required(),
     }),
 }), createMovie);
+module.exports = router;
