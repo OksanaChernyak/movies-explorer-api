@@ -12,7 +12,7 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.deleteMovieById = (req, res, next) => {
-    Movie.findById(req.params.movieId).then((movie) => {
+    Movie.findById(req.params._id).then((movie) => {
         if (movie) {
             const ownerId = movie.owner.toString();
             const userId = req.user._id;
@@ -41,9 +41,8 @@ module.exports.deleteMovieById = (req, res, next) => {
 };
 
 module.exports.createMovie = (req, res, next) => {
-    const owner = req.user._id;
     const { country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId } = req.body;
-    Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner })
+    Movie.create({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId, owner: req.user._id })
         .then((movie) => res.send(movie))
         .catch((error) => {
             if (error.name === 'ValidationError') {
