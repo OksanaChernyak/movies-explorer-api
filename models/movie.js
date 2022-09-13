@@ -26,7 +26,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
       },
     },
   },
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
       },
     },
   },
@@ -44,7 +44,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
       },
     },
   },
