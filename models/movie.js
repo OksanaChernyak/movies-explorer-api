@@ -34,9 +34,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator(v) {
-                return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
-            },
+            //validator(v) {
+               // return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+           // },
         },
     },
     thumbnail: {

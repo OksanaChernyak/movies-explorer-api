@@ -19,7 +19,7 @@ router.post('/', celebrate({
         year: Joi.string().required(),
         description: Joi.string().required(),
         image: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
-        trailerLink: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
+        trailerLink: Joi.string().required(),
         thumbnail: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
         owner: Joi.string().alphanum().length(24).hex(),
         movieId: Joi.number().required(),
