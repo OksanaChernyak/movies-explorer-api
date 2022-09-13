@@ -11,3 +11,6 @@
 
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
+
+[Здесь](https://api.oksanamovies.nomoredomains.sbs) можно посмотреть, что из этого получилось.
+Публичный IP-адрес сервера - 130.193.43.32
