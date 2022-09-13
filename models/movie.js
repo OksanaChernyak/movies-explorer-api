@@ -24,29 +24,29 @@ const movieSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true,
-      //  validate: {
-          //  validator(v) {
-             //   return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
-         //   },
-      //  },
+        validate: {
+            validator(v) {
+                return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+            },
+        },
     },
     trailerLink: {
         type: String,
         required: true,
-       // validate: {
-            //validator(v) {
-               // return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
-           // },
-        //},
+        validate: {
+            validator(v) {
+                return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+            },
+        },
     },
     thumbnail: {
         type: String,
         required: true,
-        //validate: {
-           // validator(v) {
-              //  return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
-           // },
-       // },
+        validate: {
+            validator(v) {
+                return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/gim.test(v);
+            },
+        },
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
