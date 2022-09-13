@@ -14,7 +14,7 @@ module.exports.getMovies = (req, res, next) => {
 module.exports.deleteMovieById = (req, res, next) => {
     Movie.findById(req.params._id).then((movie) => {
         if (movie) {
-            const ownerId = movie.owner._id.toString();
+            const ownerId = movie.owner.toString();
             const userId = req.user._id;
             if (ownerId === userId) {
                 Movie.findByIdAndRemove(req.params._id)
