@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { REGEX_LINK } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -26,7 +27,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
+        return REGEX_LINK.test(v);
       },
     },
   },
@@ -35,7 +36,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
+        return REGEX_LINK.test(v);
       },
     },
   },
@@ -44,7 +45,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im.test(v);
+        return REGEX_LINK.test(v);
       },
     },
   },
