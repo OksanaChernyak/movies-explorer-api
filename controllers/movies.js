@@ -17,12 +17,16 @@ module.exports.deleteMovieById = (req, res, next) => {
       const ownerId = movie.owner.toString();
       const userId = req.user._id;
       if (ownerId === userId) {
-        return Movie.findByIdAndRemove(req.params._id)
+        Movie.findByIdAndRemove(req.params._id)
           .then((deleted) => {
             res.status(200).send(deleted);
+          })
+          .catch(() => {
+            next();
           });
+      } else {
+        next(new ForbiddenError('Вы пытаетесь удалить чужой фильм'));
       }
-      next(new ForbiddenError('Вы пытаетесь удалить чужой фильм'));
     } else {
       next(new NotFoundError('Фильм с таким идентификатором не найден'));
     }
