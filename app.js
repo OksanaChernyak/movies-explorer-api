@@ -46,7 +46,7 @@ app.post('/signup', celebrate({
 
 app.use('/users', auth, userRoute);
 app.use('/movies', auth, movieRoute);
-app.use('*', () => {
+app.use('*', auth, () => {
   throw new NotFoundError('Страница  по этому адресу не найдена');
 });
 app.use(errorLogger);
