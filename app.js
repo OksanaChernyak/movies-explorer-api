@@ -1,40 +1,34 @@
-const express = require('express');
+require('dotenv').config();
+const cors = require('cors');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { errors, celebrate, Joi } = require('celebrate');
-const { PORT = 3000 } = process.env;
+const { errors } = require('celebrate');
+const express = require('express');
+const indexRoutes = require('./routes/index');
+const errorsHandler = require('./middlewares/errors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { MDB_DEV } = require('./utils/constants');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
-    useNewUrlParser: true,
+const { PORT = 3000 } = process.env;
+const { NODE_ENV, MDB_URL } = process.env;
+
+mongoose.connect(NODE_ENV === 'production' ? MDB_URL : MDB_DEV, {
+  useNewUrlParser: true,
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/signin', celebrate({
-    body: Joi.object().keys({
-        email: Joi.string().required().email(),
-        password: Joi.string().required(),
-    }),
-}), login);
+app.use(cors());
+app.use(helmet());
+app.use(requestLogger);
 
-app.post('/signup', celebrate({
-    body: Joi.object().keys({
-        email: Joi.string().required().email(),
-        password: Joi.string().required(),
-        name: Joi.string().min(2).max(30),
-        avatar: Joi.string().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
-        about: Joi.string().min(2).max(30),
-    }),
-}), createUser);
+app.use('/', indexRoutes);
 
-app.use('/users', auth, userRoute);
-app.use('/cards', auth, cardRoute);
-app.use('/*', () => {
-    throw new NotFoundError('Страница  по этому адресу не найдена');
-});
+app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
 app.listen(PORT);
