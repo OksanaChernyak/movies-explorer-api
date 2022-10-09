@@ -24,8 +24,16 @@ router.post('/', celebrate({
         return v;
       } return error.message('Это не ссылка');
     }),
-    trailerLink: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
-    thumbnail: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
+    trailerLink: Joi.string().required().custom((v, error) => {
+      if (isURL(v)) {
+        return v;
+      } return error.message('Это не ссылка');
+    }),
+    thumbnail: Joi.string().required().custom((v, error) => {
+      if (isURL(v)) {
+        return v;
+      } return error.message('Это не ссылка');
+    }),
     owner: Joi.string().alphanum().length(24).hex(),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
