@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const { isURL } = require('validator');
 
 const {
   getMovies, createMovie, deleteMovieById,
@@ -18,7 +19,11 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
+    image: Joi.string().required().custom((v, error) => {
+      if (isURL(v)) {
+        return v;
+      } return error.message('Это не ссылка');
+    }),
     trailerLink: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
     thumbnail: Joi.string().required().regex(/^https?:\/\/(www.)?([\da-z-]+\.)+\/?\S*/im),
     owner: Joi.string().alphanum().length(24).hex(),
